@@ -20,8 +20,12 @@ defmodule KanbawlWeb.Router do
 
     scope "/api" do
       resources "/kanbans", KanbanController, only: [:index, :show] do
-        resources "/columns", ColumnsController, only: [:index, :create, :update, :delete]
-        resources "/cards", CardsController, only: [:index, :create, :update, :delete]
+        resources "/columns", ColumnsController, only: [:index, :create, :update, :delete] do
+          post "/move", PageController, :move
+        end
+        resources "/cards", CardsController, only: [:index, :create, :update, :delete] do
+          post "/move", PageController, :move
+        end
       end
     end
   end
